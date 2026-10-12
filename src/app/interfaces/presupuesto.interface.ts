@@ -1,6 +1,7 @@
 export interface Service {
   id: string;
   name: string;
+  description: string;
   basePrice: number;
   selected: boolean;
   // Parámetros opcionales específicos para el servicio Web

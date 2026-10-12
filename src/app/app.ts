@@ -1,17 +1,19 @@
 import { Component, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-
+import { ServiceListComponent } from './components/service-list/service-list'; 
+import { Service } from './interfaces/presupuesto.interface';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [CommonModule, ServiceListComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {
-  protected readonly title = signal('presupuestador-servicios-digitales');
-}
+export class AppComponent {
+  title = 'presupuestador-servicios-digitales';
 
-const listService =  signal < Service [] > ([
+//primer paso creo array de tarj con signal 
+listService =  signal < Service [] > ([
 
   {
     id: "seo",
@@ -39,4 +41,4 @@ const listService =  signal < Service [] > ([
     languages: 1,
   },
 
-]);
+])};
