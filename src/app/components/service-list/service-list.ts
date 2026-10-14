@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Service } from '../../interfaces/presupuesto.interface';
 
@@ -9,6 +9,16 @@ import { Service } from '../../interfaces/presupuesto.interface';
   templateUrl: './service-list.html',
   styleUrl: './service-list.css'
 })
+
+//RECIBE el array de servicios que manda PADRE
 export class ServiceListComponent {
-  @Input() services: Service[] = [];
+  //puerta entrada que sera un array
+   service = input< Service[] > ([]);
+ //puerta salida, que sera tipo texto
+   serviceSelect = output <Service>();
+
+    onServiceChange( service: Service) {
+this.serviceSelect.emit(service)
+ }
 }
+

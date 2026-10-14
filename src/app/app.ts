@@ -41,4 +41,8 @@ listService =  signal < Service [] > ([
     languages: 1,
   },
 
-])};
+])
+
+serviceSelect(service: Service) {
+    console.log('Servicio seleccionado:', service);
+  }};
