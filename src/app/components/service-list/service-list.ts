@@ -13,7 +13,7 @@ import { Service } from '../../interfaces/presupuesto.interface';
 //RECIBE el array de servicios que manda PADRE
 export class ServiceList {
   service = input<Service[]>([]);
-
+totalPrice = input<number>(0);
   serviceSelect = output<Service>();
 
   onServiceChange(service: Service) {

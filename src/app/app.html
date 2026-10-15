@@ -1,9 +1,11 @@
 <main class="container">
   <h1>Calculadora de Presupuestos</h1>
 
-  <!-- Aquí llamamos al componente hijo y le pasamos los datos del padre -->
-  <app-service-list [service]="listService()"
-    (serviceSelect)="serviceSelect($event)">
+  <!-- Aqui llamamos al componente hijo y le pasamos los datos del padre -->
+  <app-service-list 
+  [service]="listService()"
+  [totalPrice]="totalPrice()"
+  (serviceSelect)="serviceSelect($event)">
   </app-service-list>
   
 </main>

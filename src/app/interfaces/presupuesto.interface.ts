@@ -4,7 +4,7 @@ export interface Service {
   description: string;
   basePrice: number;
   selected: boolean;
-  // Parámetros opcionales específicos para el servicio Web
+  //opcionales:
   pages?: number;
   languages?: number;
 }
