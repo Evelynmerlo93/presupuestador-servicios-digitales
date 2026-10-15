@@ -4,8 +4,10 @@
 
   <ul>
     @for (service of service(); track service.id) {
-    <li>
-      <input type="checkbox" (change) = "onServiceChange(service)">
+    <li> 
+      <input type="checkbox"
+      [checked]="service.selected" 
+       (change) = "onServiceChange(service)">
       {{ service.name }} - ${{ service.basePrice }}
     </li>
     }
