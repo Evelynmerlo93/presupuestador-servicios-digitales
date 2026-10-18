@@ -18,7 +18,9 @@ export class ServiceList {
 serviceSelect = output <Service> ();
 
   onServiceChange(service: Service) {
-    this.serviceSelect.emit(service);
+    // Invertimos el estado 'selected' antes de emitirlo
+    const updatedService = { ...service, selected: !service.selected };
+    this.serviceSelect.emit(updatedService);
   }
   // Funcion para cuando cambian las páginas
   onPagesChange(service: Service, event: Event) {
