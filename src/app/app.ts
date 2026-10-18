@@ -12,7 +12,7 @@ import { Service } from './interfaces/presupuesto.interface';
 export class AppComponent {
   title = 'presupuestador-servicios-digitales';
 
-  listService = signal<Service[]>([
+  listService = signal <Service[]> ([
     {
       id: 'seo',
       name: 'seo',
@@ -44,23 +44,37 @@ export class AppComponent {
     this.listService.update((services) =>
       services.map((item) => {
         if (item.id === clickedService.id) {
-          return { ...item, selected: !item.selected };
+          return clickedService;
         } else {
           return item;
         }
       }),
     );
 
-    console.log('Servicio seleccionado:', clickedService);
+    console.log('Servicio seleccionado o modificado: ', clickedService);
   }
-
+// Calculadora para sumar automáticamente los precios de los servicios que tienen selected: true
   totalPrice = computed(() => {
-    let total = 0;    for (let item of this.listService()) {
+    let total = 0;  
+
+    for (let item of this.listService()) {
+      // 1. Primero comprobamos que el servicio esté marcado
       if (item.selected) {
-        total = total + item.basePrice;
-      }
+        
+        // 2. Si está marcado, miramos si es la web o es otro servicio
+        if (item.id === 'web') {
+          // Fórmula especial para la web: 500 + ((páginas + idiomas) * 30)
+          const pages = item.pages || 0;
+          const languages = item.languages || 0;
+          total += item.basePrice + ((pages + languages) * 30);
+        } else {
+          // Para SEO o Ads, sumamos su precio base normal
+          total += item.basePrice;
+        }
+
+      } // Si no está seleccionado (selected: false), el bucle lo ignora y no suma nada.
     }
+    
     return total;
   });
-  //precio total calculado va aqui
 }
