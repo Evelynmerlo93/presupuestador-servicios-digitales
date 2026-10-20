@@ -20,7 +20,6 @@ export class AppComponent {
       basePrice: 300,
       selected: false,
     },
-
     {
       id: 'ads',
       name: 'ads',
@@ -28,7 +27,6 @@ export class AppComponent {
       basePrice: 400,
       selected: false,
     },
-
     {
       id: 'web',
       name: 'web',
@@ -45,7 +43,9 @@ export class AppComponent {
       services.map((item) => {
         if (item.id === clickedService.id) {
           return clickedService;
+
         } else {
+          
           return item;
         }
       }),
@@ -58,15 +58,18 @@ export class AppComponent {
     let total = 0;  
 
     for (let item of this.listService()) {
-      // 1. Primero comprobamos que el servicio esté marcado
+      // Primero comprobar que el servicio este marcado
       if (item.selected) {
         
-        // 2. Si está marcado, miramos si es la web o es otro servicio
+        // Si esta marcado, miramos si es la web o es otro servicio
         if (item.id === 'web') {
+
           // Fórmula especial para la web: 500 + ((páginas + idiomas) * 30)
           const pages = item.pages || 0;
           const languages = item.languages || 0;
+          
           total += item.basePrice + ((pages + languages) * 30);
+       
         } else {
           // Para SEO o Ads, sumamos su precio base normal
           total += item.basePrice;
