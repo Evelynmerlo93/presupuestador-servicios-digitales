@@ -82,4 +82,9 @@ export class AppComponent {
     //se acumulo aqui en total
     return total;
   });
+
+  saveUserData( userSaveData: {text: string, tel:string, email:string}){
+   
+    //console.log("Client data ready to save!", userSaveData )
+  }
 }

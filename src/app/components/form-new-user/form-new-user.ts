@@ -7,8 +7,10 @@ import { Component, output } from '@angular/core';
   styleUrl: './form-new-user.css',
 })
 export class FormNewUser {
-  //declaro aqui output con solicitud de form modo string para seguridad
+  //declaro aqui output estricta con solicitud de form modo string para seguridad
   userRegister = output <{text:string, tel:string, email:string}> (); 
-    
-  
+  // La función que se ejecuta cuando el usuario le da a enviar
+  sendForm(event: Event){
+    this.userRegister.emit({text:"Nicolas", tel:"123456", email:"nico@fake.com"});
+  }
 }
