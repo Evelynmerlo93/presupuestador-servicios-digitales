@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, output } from '@angular/core';
 
 @Component({
   selector: 'app-form-new-user',
@@ -6,4 +6,9 @@ import { Component } from '@angular/core';
   templateUrl: './form-new-user.html',
   styleUrl: './form-new-user.css',
 })
-export class FormNewUser {}
+export class FormNewUser {
+  //declaro aqui output con solicitud de form modo string para seguridad
+  userRegister = output <{text:string, tel:string, email:string}> (); 
+    
+  
+}
