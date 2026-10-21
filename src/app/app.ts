@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { ServiceList } from './components/service-list/service-list';
 import { Service } from './interfaces/presupuesto.interface';
+import { FormNewUser } from './components/form-new-user/form-new-user';
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, ServiceList],
+  imports: [CommonModule, ServiceList, FormNewUser],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

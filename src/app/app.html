@@ -7,5 +7,7 @@
   [totalPrice]="totalPrice()"
   (serviceSelect)="serviceSelect($event)">
   </app-service-list>
-  <app-form-new-user (userRegister) = "saveUserData"></app-form-new-user>
+  <app-form-new-user 
+  (userRegister) = "saveUserData($event)">
+  </app-form-new-user>
 </main>

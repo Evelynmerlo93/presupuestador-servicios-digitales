@@ -11,6 +11,7 @@ export class FormNewUser {
   userRegister = output <{text:string, tel:string, email:string}> (); 
   // La función que se ejecuta cuando el usuario le da a enviar
   sendForm(event: Event){
+    event.preventDefault();// <-- Frena el evento nativo del navegador
     this.userRegister.emit({text:"Nicolas", tel:"123456", email:"nico@fake.com"});
   }
 }
