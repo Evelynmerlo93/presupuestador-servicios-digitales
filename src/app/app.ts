@@ -86,6 +86,6 @@ export class AppComponent {
 
   saveUserData( userSaveData: {text: string, tel:string, email:string}){
    
-    //console.log("Client data ready to save!", userSaveData )
+  console.log("Client data ready to save!", userSaveData )
   }
 }

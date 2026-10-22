@@ -1,11 +1,12 @@
 <section class="form-container">
 
     <h2>Demanar pressupost</h2>
-    <form (submit)="sendForm($event)">
+    <form (submit)="sendForm($event, textInput.value, telInput.value, emailInput.value)">
         <div class="form-body">
-            <input type="text" placeholder="Nom" required>
-            <input type="tel" placeholder="Telèfon" required>
-            <input type="email" placeholder="Email" required>
+
+            <input #textInput required type="text" placeholder="Nom" >
+            <input #telInput required type="tel" placeholder="Telèfon" >
+            <input #emailInput required type="email" placeholder="Email">
 
             <button type="submit" class="btn-submit">
                 Sol·licitar pressupost →
