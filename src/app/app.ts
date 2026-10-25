@@ -38,6 +38,8 @@ export class AppComponent {
       languages: 1,
     },
   ]);
+//segunda signal
+clientData = signal<{ text: string; tel: string; email: string } | null>(null);
 
   serviceSelect(clickedService: Service) {
     this.listService.update((services) =>
@@ -84,8 +86,11 @@ export class AppComponent {
     return total;
   });
 
+//metodo que toma  la informacion del formulario
   saveUserData( userSaveData: {text: string, tel:string, email:string}){
-   
-  console.log("Client data ready to save!", userSaveData )
+//Usamos .set() para meter los datos del formulario dentro del signal
+   this.clientData.set(userSaveData);
+    //console.log("Client data ready to save!", userSaveData )
   }
+
 }
