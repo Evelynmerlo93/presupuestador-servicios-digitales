@@ -10,8 +10,9 @@ export class FormNewUser {
   //declaro aqui output estricta con solicitud de form modo string para seguridad
   userRegister = output <{text:string, tel:string, email:string}> (); 
   // La función que se ejecuta cuando el usuario le da a enviar
-  sendForm(event: Event){
+  sendForm(event: Event, text: string, tel: string, email: string ){
     event.preventDefault();// <-- Frena el evento nativo del navegador
-    this.userRegister.emit({text:"Nicolas", tel:"123456", email:"nico@fake.com"});
+    this.userRegister.emit({text:text, tel:tel, email:email});
+    //console.log("Datos enviados:", text, tel, email);
   }
 }
