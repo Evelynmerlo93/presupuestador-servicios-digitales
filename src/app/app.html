@@ -2,24 +2,36 @@
   <h1>Frontender.itacademy</h1>
 
   <!--llamamos al componente hijo y le pasamos los datos del padre -->
-  <app-service-list 
-  [service]="listService()" 
-  [totalPrice]="totalPrice()" 
-  (serviceSelect)="serviceSelect($event)">
+  <app-service-list [service]="listService()" [totalPrice]="totalPrice()" (serviceSelect)="serviceSelect($event)">
   </app-service-list>
 
-  <app-form-new-user 
-  (userRegister)="saveUserData($event)">
+  <app-form-new-user (userRegister)="saveUserData($event)">
   </app-form-new-user>
 
   <section>
     <h2>Pressupost en curs: </h2>
 
     @for (client of clientsData(); track client) {
+      
     <div class="client-card">
-      <p>Text: {{ client.text }}</p>
-      <p>Email: {{ client.email }}</p>
-      <p>Telephone: {{ client.tel }}</p>
+      <div class="info-client">
+        <h4>Joan Farres{{ client.text }}</h4>
+        <p>joan.farre@gmail.com{{ client.email }}</p>
+        <p>666 666 666 {{ client.tel }}</p>
+      </div>
+
+      <div class="service-contracted">
+        <h5>Serveis contractats: </h5>
+        <ul>
+          <li>Ads</li>
+          <li>SEO</li>
+        </ul>
+      </div>
+
+      <div class="total-contracted">
+      <h2>400$</h2>
+      </div>
+
     </div>
     }
   </section>
