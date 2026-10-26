@@ -1,12 +1,11 @@
 import { Component, signal, computed } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { ServiceList } from './components/service-list/service-list';
 import { Service } from './interfaces/presupuesto.interface';
 import { FormNewUser } from './components/form-new-user/form-new-user';
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, ServiceList, FormNewUser],
+  imports: [ServiceList, FormNewUser],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
@@ -58,12 +57,11 @@ clientsData = signal <{ text: string; tel: string; email: string } [] >([]);
   }
 // Calculadora suma autom. precios de los serv que tienen selected: true
   totalPrice = computed(() => {
-    let total = 0;  // es let porque se modificara 
+    let total = 0;  // let porque se modifica
 
     for (let item of this.listService()) {
       // Primero comprobar que el servicio este marcado
       if (item.selected) {
-        
         // Si esta marcado, miramos si es la web o es otro servicio
         if (item.id === 'web') {
 
@@ -88,8 +86,9 @@ clientsData = signal <{ text: string; tel: string; email: string } [] >([]);
 
 //metodo que toma la informacion del formulario
   saveUserData(userSaveData: { text: string, tel:string, email:string}){
-//Usamos .set() para meter los datos del formulario dentro del signal
-   this.clientsData.update((theList) => [..] );
+
+    //actualizo lista y agrego los usuarios nuevos
+   this.clientsData.update((patata) => [...patata, userSaveData  ] );
     console.log("Client data ready to save!", userSaveData )
   }
 
