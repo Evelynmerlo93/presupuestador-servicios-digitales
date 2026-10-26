@@ -12,8 +12,8 @@ import { FormNewUser } from './components/form-new-user/form-new-user';
 })
 export class AppComponent {
   title = 'presupuestador-servicios-digitales';
+listService = signal <Service []> ([
 
-  listService = signal <Service []> ([
     {
       id: 'seo',
       name: 'seo',
@@ -38,8 +38,8 @@ export class AppComponent {
       languages: 1,
     },
   ]);
-//segunda signal
-clientData = signal<{ text: string; tel: string; email: string } | null>(null);
+//segunda signal, que guardaba un cliente individual, lo cambio que sea array
+clientsData = signal <{ text: string; tel: string; email: string } [] >([]);
 
   serviceSelect(clickedService: Service) {
     this.listService.update((services) =>
@@ -74,7 +74,7 @@ clientData = signal<{ text: string; tel: string; email: string } | null>(null);
           const languages = item.languages || 0;
           //toma el preciobase de la web
           total += item.basePrice + ((pages + languages) * 30);
-       
+
         } else {
           // Para SEO o Ads, sumo su precio base normal
           total += item.basePrice;
@@ -86,11 +86,11 @@ clientData = signal<{ text: string; tel: string; email: string } | null>(null);
     return total;
   });
 
-//metodo que toma  la informacion del formulario
-  saveUserData( userSaveData: {text: string, tel:string, email:string}){
+//metodo que toma la informacion del formulario
+  saveUserData(userSaveData: { text: string, tel:string, email:string}){
 //Usamos .set() para meter los datos del formulario dentro del signal
-   this.clientData.set(userSaveData);
-    //console.log("Client data ready to save!", userSaveData )
+   this.clientsData.update((theList) => [..] );
+    console.log("Client data ready to save!", userSaveData )
   }
 
 }
