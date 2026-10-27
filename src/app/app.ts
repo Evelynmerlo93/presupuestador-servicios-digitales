@@ -45,8 +45,10 @@ clientsData = signal <{ text: string; tel: string; email: string } [] >([]);
 searchFilter = signal ('');
 
 filteredServices = computed(() => {
-  return this.listService().filter((patata) => 
-    patata.name.toLowerCase().includes(this.searchFilter().toLowerCase())
+  return this.listService()
+        .filter((patata) => 
+        patata.name.toLowerCase()
+        .includes(this.searchFilter().toLowerCase())
   );
 })
 
