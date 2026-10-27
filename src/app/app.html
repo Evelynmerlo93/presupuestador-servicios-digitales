@@ -1,18 +1,28 @@
 <main class="container">
   <h1>Frontender.itacademy</h1>
 
-  <!--llamamos al componente hijo y le pasamos los datos del padre -->
-  <app-service-list [service]="listService()" [totalPrice]="totalPrice()" (serviceSelect)="serviceSelect($event)">
+  <!--Lista de servicios -->
+  <app-service-list 
+  [service]="filteredServices()" 
+  [totalPrice]="totalPrice()" 
+  (serviceSelect)="serviceSelect($event)">
   </app-service-list>
 
-  <app-form-new-user (userRegister)="saveUserData($event)">
+   <!--Formulario -->
+  <app-form-new-user 
+  (userRegister)="saveUserData($event)">
   </app-form-new-user>
 
   <section>
-    <h2>Pressupost en curs: </h2>
+    <section>
+      <!--Filtrado de presupuestos de usuarios -->
+      <h3>Pressupost en curs</h3>
+      <input type="text" (input)="badgetListFilter($event)" placeholder="Buscar...">
+    </section>
 
+ <!--Tarjetas usuarios -->
     @for (client of clientsData(); track client) {
-      
+
     <div class="client-card">
       <div class="info-client">
         <h4>Joan Farres{{ client.text }}</h4>

@@ -11,7 +11,8 @@ import { FormNewUser } from './components/form-new-user/form-new-user';
 })
 export class AppComponent {
   title = 'presupuestador-servicios-digitales';
-listService = signal <Service []> ([
+
+  listService = signal <Service []> ([
 
     {
       id: 'seo',
@@ -37,8 +38,18 @@ listService = signal <Service []> ([
       languages: 1,
     },
   ]);
-//segunda signal, que guardaba un cliente individual, lo cambio que sea array
+
+//2da signal, cesta con los servicios de clientes
 clientsData = signal <{ text: string; tel: string; email: string } [] >([]);
+
+searchFilter = signal ('');
+
+filteredServices = computed(() => {
+  return this.listService().filter((patata) => 
+    patata.name.toLowerCase().includes(this.searchFilter().toLowerCase())
+  );
+})
+
 
   serviceSelect(clickedService: Service) {
     this.listService.update((services) =>
@@ -84,12 +95,15 @@ clientsData = signal <{ text: string; tel: string; email: string } [] >([]);
     return total;
   });
 
-//metodo que toma la informacion del formulario
+//metodo toma la infor del formulario
   saveUserData(userSaveData: { text: string, tel:string, email:string}){
 
     //actualizo lista y agrego los usuarios nuevos
    this.clientsData.update((patata) => [...patata, userSaveData  ] );
     console.log("Client data ready to save!", userSaveData )
   }
-
+  //para sacar el texto que escribio el usuario en buscador y acttualizo lo que escriba con set
+badgetListFilter(event:any){
+  const textUser= event.target.value;
+}
 }
