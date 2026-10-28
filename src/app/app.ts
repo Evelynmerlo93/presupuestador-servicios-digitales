@@ -75,29 +75,38 @@ filteredServices = computed(() => {
     for (let item of this.listService()) {
       // Primero comprobar que el servicio este marcado
       if (item.selected) {
-        // Si esta marcado, miramos si es la web o es otro servicio
-        if (item.id === 'web') {
+        
+        if (item.id === 'web' &&  item.basePrice === 500 ) {
+          const pages = item.pages || 1;
+          const languages = item.languages || 1;
+          let morePages = 0
+          let moreLenguages = 0
 
-          //Formula especial: 500 + ((páginas + idiomas) * 30)
-          //intenta leer cuantas paginas eligio usuario, si no existe sera 0
-          const pages = item.pages || 0;
-          //intenta leer cuantos lenguajes eligio usuario, si no existe sera 0
-          const languages = item.languages || 0;
-          //toma el preciobase de la web
-          total += item.basePrice + ((pages + languages) * 30);
+            if(morePages > 1){
+            morePages = morePages * 30
+          } else {
+            morePages = 0
+          }
+
+            if(moreLenguages > 1){
+            moreLenguages = moreLenguages * 30
+            } else {
+            moreLenguages = 0
+          }
+            
+          total += item.basePrice + ((morePages + moreLenguages) * 30);
 
         } else {
-          // Para SEO o Ads, sumo su precio base normal
           total += item.basePrice;
         }
 
-      } // Si no está seleccionado (selected: false), el bucle lo ignora y no suma nada.
+      }
     }
 
     return total;
   });
 
-//metodo toma la infor del formulario
+//toma la informacion del formulario
   saveUserData(userSaveData: { text: string, tel:string, email:string}){
 
     //actualizo lista y agrego los usuarios nuevos
