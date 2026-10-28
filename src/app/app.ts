@@ -93,7 +93,7 @@ filteredServices = computed(() => {
 
       } // Si no está seleccionado (selected: false), el bucle lo ignora y no suma nada.
     }
-    //se acumulo aqui en total
+
     return total;
   });
 
