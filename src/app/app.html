@@ -1,16 +1,20 @@
 <main class="container">
-  <h6>Frontender.itacademy</h6>
+
+  <div class="logo-container">
+  <img src="/logo-unico.jpg" alt="Logo Frontender.itacademy">
+  </div>
+
+<!--banner-->
+<div class="banner-container">
+  <img src="/banner.jpg" alt="Aconsegueix la millor qualitat">
+</div>
 
   <!--Lista de servicios -->
-  <app-service-list 
-  [service]="filteredServices()" 
-  [totalPrice]="totalPrice()" 
-  (serviceSelect)="serviceSelect($event)">
+  <app-service-list [service]="filteredServices()" [totalPrice]="totalPrice()" (serviceSelect)="serviceSelect($event)">
   </app-service-list>
 
-   <!--Formulario -->
-  <app-form-new-user 
-  (userRegister)="saveUserData($event)">
+  <!--Formulario -->
+  <app-form-new-user (userRegister)="saveUserData($event)">
   </app-form-new-user>
 
   <section>
@@ -21,17 +25,19 @@
       <input type="text" (input)="badgetListFilter($event)" placeholder="Buscar...">
     </section>
 
- <!--Tarjetas usuarios -->
+    <!--Tarjetas usuarios -->
     @for (client of clientsData(); track client) {
 
     <div class="client-card">
+
       <div class="info-client">
-        <h4>Joan Farres{{ client.text }}</h4>
-        <p>joan.farre@gmail.com{{ client.email }}</p>
-        <p>666 666 666 {{ client.tel }}</p>
+        <h4> {{ client.text }} </h4>
+        <p> {{ client.email }} </p>
+        <p> {{ client.tel }} </p>
       </div>
 
-      <div class="service-contracted">
+    <!--  <div class="service-contracted">
+
         <h5>Serveis contractats: </h5>
         <ul>
           <li>Ads</li>
@@ -40,9 +46,15 @@
       </div>
 
       <div class="total-contracted">
-      <h2>400$</h2>
+        <h2>400$</h2>
       </div>
 
+    </div>
+    }
+  </section>
+
+</main>
+-->
     </div>
     }
   </section>

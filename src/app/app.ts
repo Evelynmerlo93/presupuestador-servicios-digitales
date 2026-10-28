@@ -16,22 +16,22 @@ export class AppComponent {
   listService = signal <Service []> ([
 
     {
-      id: 'seo',
-      name: 'seo',
+      id: 'Seo',
+      name: 'Seo',
       description: "Programació d' una web responsive completa",
       basePrice: 300,
       selected: false,
     },
     {
-      id: 'ads',
-      name: 'ads',
+      id: 'Ads',
+      name: 'Ads',
       description: "Programació d'una web responsive completa",
       basePrice: 400,
       selected: false,
     },
     {
-      id: 'web',
-      name: 'web',
+      id: 'Web',
+      name: 'Web',
       description: "Programació d'una web responsive completa",
       basePrice: 500,
       selected: false,
@@ -71,15 +71,16 @@ filteredServices = computed(() => {
   }
 // Calculadora suma autom. precios de los serv que tienen selected: true
   totalPrice = computed(() => {
-    let total = 0;  // let porque se modifica
+    let total = 0;  
 
     for (let item of this.listService()) {
-      // Primero comprobar que el servicio este marcado
+      //  comprobar que el servicio este selecciondo
       if (item.selected) {
         
         if (item.id === 'web' &&  item.basePrice === 500 ) {
           const pages = item.pages || 1;
           const languages = item.languages || 1;
+
           let morePages = 0
           let moreLenguages = 0
 

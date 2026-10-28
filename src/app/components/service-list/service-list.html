@@ -3,47 +3,49 @@
 
   <ul>
     @for (service of service(); track service.id) {
-      
-      <li>
-<div class="container-checkbox">
-      <input type="checkbox" 
-      [checked]="service.selected" 
-      (change)="onServiceChange(service)">
-      <h5 class ="text-add-service">Afegir</h5>
 
-</div>
-      <h2>{{ service.name }}</h2>  
-      <h3>${{ service.basePrice }}</h3>
+      <li [class.selected]="service.selected">
+        
+        <!-- Bloque 1: Título y descripción (Izquierda) -->
+        <div class="service-info">
+          <h2>{{ service.name }}</h2>
+          <h6>Programació d’una web responsive completa</h6>
+        </div>
 
-<!-- solo aparece si el servicio es 'web' y está seleccionado -->
-      @if (service.id === 'web' && service.selected) {
-      <section class="web-configurator">
-      <label class="input-pages">
-          
-          Número de págines:
-          <input type="number" 
-          [value]="service.pages" 
-          (input)="onPagesChange(service, $event)
-          " min="1">
+        <!-- Bloque 2: Precio (Centro-Derecha) -->
+        <h3 class="service-price">{{ service.basePrice }}€</h3>
 
-        </label>
+        <!-- Bloque 3: Checkbox "Afegir" (Derecha) -->
+        <div class="container-checkbox">
+          <input type="checkbox" 
+                 [checked]="service.selected" 
+                 (change)="onServiceChange(service)">
+          <h5 class="text-add-service">Afegir</h5>
+        </div>
 
-        <label class="input-lenguages">
+        <!-- Bloque 4: Configurador Web (Abajo en fila completa) -->
+        @if (service.id === 'Web' && service.selected) {
+          <section class="web-configurator">
+            <label class="input-pages">
+              Número de págines:
+              <input type="number" 
+                     [value]="service.pages" 
+                     (input)="onPagesChange(service, $event)" min="1">
+            </label>
 
-          Número de llenguatges:
-          <input type="number"
-          [value]="service.languages" 
-          (input)="onLanguagesChange(service, $event)
-          " min="1">
+            <label class="input-lenguages">
+              Número de llenguatges:
+              <input type="number" 
+                     [value]="service.languages" 
+                     (input)="onLanguagesChange(service, $event)" min="1">
+            </label>
+          </section>
+        }
 
-        </label>
-    </section>
-
-      }
-    </li>
-
+      </li>
     }
-
   </ul>
-  <h3>Preu pressuposat: ${{totalPrice()}} </h3>
+<div class="total-price-container">
+  <h3>Preu pressuposat: {{totalPrice()}} €</h3>
+</div>
 </div>
