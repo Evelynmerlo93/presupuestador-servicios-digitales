@@ -1,42 +1,49 @@
 <div class="service-list">
-
   <h2>Aconsegueix la millor qualitat</h2>
-  <h3>Preu pressuposat: ${{totalPrice()}} </h3>
 
   <ul>
     @for (service of service(); track service.id) {
-    <li>
+      
+      <li>
+<div class="container-checkbox">
       <input type="checkbox" 
       [checked]="service.selected" 
       (change)="onServiceChange(service)">
+      <h5 class ="text-add-service">Afegir</h5>
 
+</div>
       <h2>{{ service.name }}</h2>  
       <h3>${{ service.basePrice }}</h3>
 
-<!-- Configurador solo aparece si el servicio es 'web' y está seleccionado -->
+<!-- solo aparece si el servicio es 'web' y está seleccionado -->
       @if (service.id === 'web' && service.selected) {
       <section class="web-configurator">
-        <label>
+      <label class="input-pages">
           
-          Páginas:
+          Número de págines:
           <input type="number" 
           [value]="service.pages" 
           (input)="onPagesChange(service, $event)
           " min="1">
+
         </label>
 
-        <label class="input-idiomas">
+        <label class="input-lenguages">
 
-          Idiomas:
+          Número de llenguatges:
           <input type="number"
           [value]="service.languages" 
           (input)="onLanguagesChange(service, $event)
           " min="1">
-        </label>
 
-      </section>
+        </label>
+    </section>
+
       }
     </li>
+
     }
+
   </ul>
+  <h3>Preu pressuposat: ${{totalPrice()}} </h3>
 </div>

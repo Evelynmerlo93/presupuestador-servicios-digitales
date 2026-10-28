@@ -9,6 +9,7 @@ import { FormNewUser } from './components/form-new-user/form-new-user';
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
+
 export class AppComponent {
   title = 'presupuestador-servicios-digitales';
 

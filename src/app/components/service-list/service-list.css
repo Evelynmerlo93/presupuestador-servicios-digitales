@@ -83,3 +83,9 @@
   text-align: center;
   font-size: 1rem;
 }
+.container-checkbox {
+  display: flex;
+  align-items:center;
+  margin-left: auto;
+  gap: 8px; /* Espacio entre el cuadradito y la palabra Afegir */
+}
