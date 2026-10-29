@@ -1,61 +1,80 @@
 <main class="container">
 
   <div class="logo-container">
-  <img src="/logo-unico.jpg" alt="Logo Frontender.itacademy">
+    <img src="/logo-unico.jpg" 
+    alt="Logo Frontender.itacademy">
   </div>
 
-<!--banner-->
-<div class="banner-container">
-  <img src="/banner.jpg" alt="Aconsegueix la millor qualitat">
-</div>
+  <!-- Banner -->
+  <div class="banner-container">
+    <img src="/banner.jpg" 
+    alt="Aconsegueix la millor qualitat">
+  </div>
 
-  <!--Lista de servicios -->
-  <app-service-list [service]="filteredServices()" [totalPrice]="totalPrice()" (serviceSelect)="serviceSelect($event)">
+  <!-- Lista de servicios -->
+  <app-service-list 
+    [service]="filteredServices()" 
+    [totalPrice]="totalPrice()" 
+    (serviceSelect)="serviceSelect($event)">
   </app-service-list>
 
-  <!--Formulario -->
-  <app-form-new-user (userRegister)="saveUserData($event)">
+  <!-- Formulario -->
+  <app-form-new-user 
+    (userRegister)="saveUserData($event)">
   </app-form-new-user>
 
-  <section>
+  <!-- Cabecera de presupuestos -->
+  <section class="header-budget">
+    <h2>Pressupostos en curs:</h2>
+    
+    <div class="budgets-toolbar">
 
-    <section>
-      <!--Filtrado de presupuestos de usuarios -->
-      <h3>Pressupost en curs</h3>
-      <input type="text" (input)="badgetListFilter($event)" placeholder="Buscar...">
-    </section>
-
-    <!--Tarjetas usuarios -->
-    @for (client of clientsData(); track client) {
-
-    <div class="client-card">
-
-      <div class="info-client">
-        <h4> {{ client.text }} </h4>
-        <p> {{ client.email }} </p>
-        <p> {{ client.tel }} </p>
+      <div class="search-box">
+     <label for="search-input">
+      <img src="/lupa.png" alt="Lupa" class="search-icon">
+    </label>
+        <input type="text" 
+        (input)="badgetListFilter($event)
+        "placeholder="">
       </div>
 
-    <!--  <div class="service-contracted">
-
-        <h5>Serveis contractats: </h5>
-        <ul>
-          <li>Ads</li>
-          <li>SEO</li>
-        </ul>
+      <div class="options-search">
+        <button type="button" class="sort-btn">Data</button>
+        <button type="button" class="sort-btn active">Import</button>
+        <button type="button" class="sort-btn">Nom</button>
       </div>
-
-      <div class="total-contracted">
-        <h2>400$</h2>
-      </div>
-
     </div>
-    }
   </section>
 
-</main>
--->
-    </div>
+  <!-- Sección de tarjetas de usuarios -->
+  <section class="client-list-section">
+    @for (client of clientsData(); track client) {
+      <div class="client-card">
+
+        <div class="info-client">
+          <h4>{{ client.text }}</h4>
+          <p class="client-email">{{ client.email }}</p>
+          <p class="client-phone">{{ client.tel }}</p>
+        </div>
+
+        <div class="services-contracted">
+
+          <h5>Serveis contractats:</h5>
+          <ul>
+            <li>Web</li>
+            <li>SEO</li>
+          </ul>
+
+        </div>
+
+        <div class="total-contracted">
+
+          <p class="total-label">Total:</p>
+          <p class="total-price">760 €</p>
+
+        </div>
+
+      </div>
     }
   </section>
 

@@ -40,11 +40,13 @@ export class AppComponent {
     },
   ]);
 
-//2da signal, cesta con los servicios de clientes
+//clientes que llegan del formulario
 clientsData = signal <{ text: string; tel: string; email: string } [] >([]);
 
+// Signal para el buscador
 searchFilter = signal ('');
 
+// filtra los clientes de la lista según lo que escribas
 filteredServices = computed(() => {
   return this.listService()
         .filter((patata) => 
@@ -53,6 +55,18 @@ filteredServices = computed(() => {
   );
 })
 
+//Recibe los datos del formulario y los añade a la lista
+saveUserData(userSaveData: { text: string, tel:string, email:string}){
+    //actualizo lista y agrego los usuarios nuevos:
+   this.clientsData.update((newClient) => [...newClient, userSaveData  ] );
+    console.log("Client data ready to save!", userSaveData )
+  }
+
+  //Captura lo que escribes y actualiza la señal con set
+badgetListFilter(event:any){
+  const textUser= event.target.value;
+  this.searchFilter.set(textUser)
+}
 
   serviceSelect(clickedService: Service) {
     this.listService.update((services) =>
@@ -77,7 +91,7 @@ filteredServices = computed(() => {
       //  comprobar que el servicio este selecciondo
       if (item.selected) {
         
-        if (item.id === 'web' &&  item.basePrice === 500 ) {
+        if (item.id === 'Web' &&  item.basePrice === 500 ) {
           const pages = item.pages || 1;
           const languages = item.languages || 1;
 
@@ -108,15 +122,6 @@ filteredServices = computed(() => {
     return total;
   });
 
-//toma la informacion del formulario
-  saveUserData(userSaveData: { text: string, tel:string, email:string}){
-
-    //actualizo lista y agrego los usuarios nuevos
-   this.clientsData.update((patata) => [...patata, userSaveData  ] );
-    console.log("Client data ready to save!", userSaveData )
-  }
-  //para sacar el texto que escribio el usuario en buscador y acttualizo lo que escriba con set
-badgetListFilter(event:any){
-  const textUser= event.target.value;
-}
+//toma informacion del formulario:
+  
 }
