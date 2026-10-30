@@ -3,16 +3,19 @@ import { RouterOutlet } from '@angular/router';
 import { ServiceList } from './components/service-list/service-list';
 import { Service } from './interfaces/presupuesto.interface';
 import { FormNewUser } from './components/form-new-user/form-new-user';
+
 @Component({
   selector: 'app-root',
   imports: [ServiceList, FormNewUser],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
-
 export class AppComponent {
   title = 'presupuestador-servicios-digitales';
-  listService = signal< Service[] >([
+  
+  // --- SEÑALES ---
+
+  listService = signal<Service[]>([
     {
       id: 'Seo',
       name: 'Seo',
@@ -44,33 +47,44 @@ export class AppComponent {
 
   // filtra los clientes de la lista según lo que escribas
   filteredServices = computed(() => {
-    return this.listService()
-      .filter((patata) =>
-        patata.name.toLowerCase()
+    return this.clientsData()
+      .filter((serviceItem) =>
+        serviceItem.text.toLowerCase()
           .includes(this.searchFilter().toLowerCase())
       );
-  })
+  });
 
-  //Recibe los datos del formulario y los añade a la lista
-  saveUserData(userSaveData: { text: string, tel: string, email: string }) {
+  totalPrice = computed(() => {
+    let total: number = 0;
 
-    //actualizo lista y agrego los usuarios nuevos:
-    this.clientsData.update((newClient) => [...newClient, userSaveData]);
-    console.log("Client data ready to save!", userSaveData)
-  }
+    for (let item of this.listService()) {
+      if (item.selected === true) {
 
-  //Captura lo que escribes y actualiza la señal con set
-  badgetListFilter(event: any) {
-    const textUser = event.target.value;
-    this.searchFilter.set(textUser)
-  }
+        if (item.name === 'Web') {
+
+          const extraServiceLanguages = item.languages!;
+          const extraServicePages = item.pages!;
+          
+          total += item.basePrice + (extraServiceLanguages + extraServicePages) * 30;
+        } else {
+
+          total += item.basePrice;
+        }
+      }
+    }
+
+    return total;
+  });
+
+  // --- ACCIONES ---
 
   serviceSelect(clickedService: Service) {
     this.listService.update((services) =>
       services.map((item) => {
-        if (item.id === clickedService.id) {
-          return clickedService;
 
+        if (item.id === clickedService.id) {
+
+          return clickedService;
         } else {
 
           return item;
@@ -81,29 +95,18 @@ export class AppComponent {
     console.log('Servicio seleccionado o modificado: ', clickedService);
   }
 
-  totalPrice = computed(() => {
-    let total: number = 0;
+  //Recibe los datos del formulario y los añade a la lista
+  saveUserData(userSaveData: { text: string, tel: string, email: string }) {
+    //actualizo lista y agrego los usuarios nuevos:
+    this.clientsData.update((newClient) => [...newClient, userSaveData]);
+   
+    console.log("Client data ready to save!", userSaveData);
+  }
 
-    for (let item of this.listService()) {
+  //Captura lo que escribes y actualiza la señal con set
+  badgetListFilter(event: any) {
 
-      if (item.selected === true) {
-
-        if (item.name === 'Web') {
-
-          const extraServiceLanguages = item.languages!;
-          const extraServicePages = item.pages!;
-
-
-          total += item.basePrice + (extraServiceLanguages + extraServicePages) * 30;
-        } else {
-
-          total += item.basePrice;
-        }
-
-      }
-    }
-
-    return total;
-  });
-
+    const textUser = event.target.value;
+    this.searchFilter.set(textUser);
+  }
 }

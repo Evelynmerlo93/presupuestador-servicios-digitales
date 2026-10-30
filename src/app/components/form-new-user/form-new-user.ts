@@ -8,11 +8,12 @@ import { Component, output } from '@angular/core';
 })
 
 export class FormNewUser {
-  // (estricta) EL PUENTE creado para enviar datos hacia componente principal
+  // EL PUENTE creado para enviar datos hacia componente principal
   userRegister = output<{ text: string, tel: string, email: string }>();
   errorMsj: string = "";
+
   //captura el envio del formulario y Frena evento  navegador con prevent (sumbit de html llama a sendForm)
-  sendForm(event: Event, text: string, tel: string, email: string) {
+  sendForm(event: Event, text: string, tel: string, email: string , formElement: HTMLFormElement) {
     event.preventDefault();
 
     if (text === "" || tel === "" || email === "") {
@@ -25,6 +26,8 @@ export class FormNewUser {
       tel: tel,
       email: email
     });
+
+    formElement.reset();
 
     console.log("Datos enviados:", text, tel, email);
   }

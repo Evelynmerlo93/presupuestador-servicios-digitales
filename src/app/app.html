@@ -13,7 +13,7 @@
 
   <!-- Lista de servicios -->
   <app-service-list 
-    [service]="filteredServices()" 
+    [service]="listService()" 
     [totalPrice]="totalPrice()" 
     (serviceSelect)="serviceSelect($event)">
   </app-service-list>
@@ -48,7 +48,7 @@
 
   <!-- Sección de tarjetas de usuarios -->
   <section class="client-list-section">
-    @for (client of clientsData(); track client) {
+    @for (client of filteredServices(); track client) {
       <div class="client-card">
 
         <div class="info-client">
@@ -69,8 +69,8 @@
 
         <div class="total-contracted">
 
-          <p class="total-label">Total:</p>
-          <p class="total-price">760 €</p>
+          <p class="total-label">Total:{{ totalPrice() }}</p>
+          <p class="total-price"></p>
 
         </div>
 
