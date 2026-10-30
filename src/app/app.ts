@@ -12,9 +12,7 @@ import { FormNewUser } from './components/form-new-user/form-new-user';
 
 export class AppComponent {
   title = 'presupuestador-servicios-digitales';
-
-  listService = signal <Service []> ([
-
+  listService = signal< Service[] >([
     {
       id: 'Seo',
       name: 'Seo',
@@ -40,33 +38,32 @@ export class AppComponent {
     },
   ]);
 
-//clientes que llegan del formulario
-clientsData = signal <{ text: string; tel: string; email: string } [] >([]);
+  clientsData = signal<{ text: string; tel: string; email: string }[]>([]);
 
-// Signal para el buscador
-searchFilter = signal ('');
+  searchFilter = signal('');
 
-// filtra los clientes de la lista según lo que escribas
-filteredServices = computed(() => {
-  return this.listService()
-        .filter((patata) => 
+  // filtra los clientes de la lista según lo que escribas
+  filteredServices = computed(() => {
+    return this.listService()
+      .filter((patata) =>
         patata.name.toLowerCase()
-        .includes(this.searchFilter().toLowerCase())
-  );
-})
+          .includes(this.searchFilter().toLowerCase())
+      );
+  })
 
-//Recibe los datos del formulario y los añade a la lista
-saveUserData(userSaveData: { text: string, tel:string, email:string}){
+  //Recibe los datos del formulario y los añade a la lista
+  saveUserData(userSaveData: { text: string, tel: string, email: string }) {
+
     //actualizo lista y agrego los usuarios nuevos:
-   this.clientsData.update((newClient) => [...newClient, userSaveData  ] );
-    console.log("Client data ready to save!", userSaveData )
+    this.clientsData.update((newClient) => [...newClient, userSaveData]);
+    console.log("Client data ready to save!", userSaveData)
   }
 
   //Captura lo que escribes y actualiza la señal con set
-badgetListFilter(event:any){
-  const textUser= event.target.value;
-  this.searchFilter.set(textUser)
-}
+  badgetListFilter(event: any) {
+    const textUser = event.target.value;
+    this.searchFilter.set(textUser)
+  }
 
   serviceSelect(clickedService: Service) {
     this.listService.update((services) =>
@@ -75,7 +72,7 @@ badgetListFilter(event:any){
           return clickedService;
 
         } else {
-          
+
           return item;
         }
       }),
@@ -83,36 +80,23 @@ badgetListFilter(event:any){
 
     console.log('Servicio seleccionado o modificado: ', clickedService);
   }
-// Calculadora suma autom. precios de los serv que tienen selected: true
+
   totalPrice = computed(() => {
-    let total = 0;  
+    let total: number = 0;
 
     for (let item of this.listService()) {
-      //  comprobar que el servicio este selecciondo
-      if (item.selected) {
-        
-        if (item.id === 'Web' &&  item.basePrice === 500 ) {
-          const pages = item.pages || 1;
-          const languages = item.languages || 1;
 
-          let morePages = 0
-          let moreLenguages = 0
+      if (item.selected === true) {
 
-            if(morePages > 1){
-            morePages = morePages * 30
-          } else {
-            morePages = 0
-          }
+        if (item.name === 'Web') {
 
-            if(moreLenguages > 1){
-            moreLenguages = moreLenguages * 30
-            } else {
-            moreLenguages = 0
-          }
-            
-          total += item.basePrice + ((morePages + moreLenguages) * 30);
+          const extraServiceLanguages = item.languages!;
+          const extraServicePages = item.pages!;
 
+
+          total += item.basePrice + (extraServiceLanguages + extraServicePages) * 30;
         } else {
+
           total += item.basePrice;
         }
 
@@ -122,6 +106,4 @@ badgetListFilter(event:any){
     return total;
   });
 
-//toma informacion del formulario:
-  
 }

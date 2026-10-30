@@ -35,7 +35,7 @@ body, .container {
   max-width: 50rem;
  margin: 3.5rem auto 2rem auto;
   width: 100%;
-  border-top: 0.125rem dashed #e5e7eb; /* Esta es la línea punteada/discontinua */
+  border-top: 0.125rem dashed #e5e7eb; 
   padding-top: 2rem;
 }
 

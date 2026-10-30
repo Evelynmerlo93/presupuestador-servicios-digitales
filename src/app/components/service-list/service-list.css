@@ -64,7 +64,7 @@
   accent-color: #10b981;
   width: 1rem;
   height: 1rem;
-  cursor: pointer; /* O el tono exacto de verde (#2e7d32) que estés usando en las tarjetas */
+  cursor: pointer;
 }
 
 .container-checkbox {

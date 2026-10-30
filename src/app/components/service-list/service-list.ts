@@ -12,6 +12,7 @@ import { Service } from '../../interfaces/presupuesto.interface';
 //RECIBE lo que manda PADRE
 export class ServiceList {
     service = input<Service[]>([]);
+    
   totalPrice = input<number>(0);
 
 //luego avisa al PADRE para que actualice informacion
