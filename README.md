@@ -1,7 +1,7 @@
 # 🚀 Angular Digital Budget App
 
 Aplicación web moderna desarrollada en **Angular** (utilizando señales, control de flujo nativo y componentes modulares) diseñada para la gestión, configuración y cálculo de presupuestos digitales de servicios web, SEO y campañas de publicidad.
-
+![alt text](image.png)
 ---
 
 ## ✨ Características Principales
