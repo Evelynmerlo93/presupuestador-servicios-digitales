@@ -44,3 +44,9 @@ Ejecuta el servidor de desarrollo:
 Bash
 ng serve
 Abre tu navegador y accede a http://localhost:4200/.
+
+
+## 📋 Metodología y Tablero Kanban
+El desarrollo de este proyecto se ha organizado utilizando metodologías ágiles, estructurando las tareas por **Épicas** e **Historias de Usuario** (HU):
+
+![Tablero Kanban](./kanban/image.png)

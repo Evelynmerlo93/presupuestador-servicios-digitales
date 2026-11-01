@@ -10,6 +10,7 @@ import { FormNewUser } from './components/form-new-user/form-new-user';
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
+//CLASE PRINCIPAL;
 export class AppComponent {
   title = 'presupuestador-servicios-digitales';
   
@@ -41,11 +42,17 @@ export class AppComponent {
     },
   ]);
 
-  clientsData = signal<{ text: string; tel: string; email: string }[]>([]);
+  clientsData = signal<{ 
+    text: string; 
+    tel: string; 
+    email: string 
+    serviceSelect: Service [];
+    total: number;
+  }[]> ([]);
 
   searchFilter = signal('');
 
-  // filtra los clientes de la lista según lo que escribas
+
   filteredServices = computed(() => {
     return this.clientsData()
       .filter((serviceItem) =>
@@ -83,11 +90,9 @@ export class AppComponent {
       services.map((item) => {
 
         if (item.id === clickedService.id) {
-
-          return clickedService;
+        return clickedService;
         } else {
-
-          return item;
+        return item;
         }
       }),
     );
@@ -96,7 +101,8 @@ export class AppComponent {
   }
 
   //Recibe los datos del formulario y los añade a la lista
-  saveUserData(userSaveData: { text: string, tel: string, email: string }) {
+  saveUserData(userSaveData: { text: string, tel: string, email: string, serviceSelect: Service [], total:number }) {
+    
     //actualizo lista y agrego los usuarios nuevos:
     this.clientsData.update((newClient) => [...newClient, userSaveData]);
    

@@ -13,17 +13,17 @@ import { Service } from '../../interfaces/presupuesto.interface';
 export class ServiceList {
     service = input<Service[]>([]);
     
-  totalPrice = input<number>(0);
+    totalPrice = input<number>(0);
 
-//luego avisa al PADRE para que actualice informacion
+//avisa al PADRE para que actualice informacion
 serviceSelect = output <Service> ();
 
   onServiceChange(service: Service) {
-    // Invertimos el estado 'selected' antes de emitirlo
+    //crea una copia invierto estado y emito al padre
     const updatedService = { ...service, selected: !service.selected };
     this.serviceSelect.emit(updatedService);
   }
-  // Funcion para cuando cambian las páginas
+
   onPagesChange(service: Service, event: Event) {
 
     const inputElement = event.target as HTMLInputElement;
@@ -31,7 +31,7 @@ serviceSelect = output <Service> ();
 
     this.serviceSelect.emit(updatedService);
   }
-  // Funcion para cuando cambian los idiomas
+
   onLanguagesChange(service: Service, event: Event) {
 
     const inputElement = event.target as HTMLInputElement;

@@ -8,7 +8,7 @@ import { Component, output } from '@angular/core';
 })
 
 export class FormNewUser {
-  // EL PUENTE creado para enviar datos hacia componente principal
+  // EL PUENTE 
   userRegister = output<{ text: string, tel: string, email: string }>();
   errorMsj: string = "";
 
