@@ -1,41 +1,34 @@
 <main class="container">
 
   <div class="logo-container">
-    <img src="/logo-unico.jpg" 
-    alt="Logo Frontender.itacademy">
+    <img src="/logo-unico.jpg" alt="Logo Frontender.itacademy">
   </div>
 
   <!-- Banner -->
   <div class="banner-container">
-    <img src="/banner.jpg" 
-    alt="Aconsegueix la millor qualitat">
+    <img src="/banner.jpg" alt="Aconsegueix la millor qualitat">
   </div>
 
   <!-- Lista de servicios -->
-  <app-service-list 
-    [service]="listService()" 
-    [totalPrice]="totalPrice()" 
-    (serviceSelect)="serviceSelect($event)">
+  <app-service-list [service]="listService()" [totalPrice]="totalPrice()" (serviceSelect)="serviceSelect($event)">
   </app-service-list>
 
   <!-- Formulario -->
-  <app-form-new-user 
-    (userRegister)="saveUserData($event)">
+  <app-form-new-user (userRegister)="saveUserData($event)">
   </app-form-new-user>
 
   <!-- Cabecera de presupuestos -->
   <section class="header-budget">
     <h2>Pressupostos en curs:</h2>
-    
+
     <div class="budgets-toolbar">
 
       <div class="search-box">
-     <label for="search-input">
-      <img src="/lupa.png" alt="Lupa" class="search-icon">
-    </label>
-        <input type="text" 
-        (input)="badgetListFilter($event)
-        "placeholder="">
+        <label for="search-input">
+          <img src="/lupa.png" alt="Lupa" class="search-icon">
+        </label>
+        <input type="text" (input)="badgetListFilter($event)
+        " placeholder="">
       </div>
 
       <div class="options-search">
@@ -46,35 +39,35 @@
     </div>
   </section>
 
-  <!-- Sección de tarjetas de usuarios -->
+  <!-- Sección de tarjetas de usuarios -- 1 for recorre clientes -->
   <section class="client-list-section">
     @for (client of filteredServices(); track client) {
-      <div class="client-card">
+    <div class="client-card">
 
-        <div class="info-client">
-          <h4>{{ client.text }}</h4>
-          <p class="client-email">{{ client.email }}</p>
-          <p class="client-phone">{{ client.tel }}</p>
-        </div>
+      <div class="info-client">
+        <h4>{{ client.text }}</h4>
+        <p class="client-email">{{ client.email }}</p>
+        <p class="client-phone">{{ client.tel }}</p>
+      </div>
 
-        <div class="services-contracted">
-
-          <h5>Serveis contractats:</h5>
-          <ul>
-            <li>Web</li>
-            <li>SEO</li>
-          </ul>
-
-        </div>
-
-        <div class="total-contracted">
-
-          <p class="total-label">Total:{{ totalPrice() }}</p>
-          <p class="total-price"></p>
-
-        </div>
+      <div class="services-contracted">
+        <h5>Serveis contractats:</h5>
+        <ul>
+          @for (service of client.serviceSelect; track service.id) {
+          <li>{{ service.name }} - ${{ service.basePrice }}</li>
+          }
+        </ul>
 
       </div>
+
+      <div class="total-contracted">
+
+        <p class="total-label">Total:{{ totalPrice() }}</p>
+        <p class="total-price"></p>
+
+      </div>
+
+    </div>
     }
   </section>
 

@@ -9,7 +9,7 @@ import { Component, output } from '@angular/core';
 
 export class FormNewUser {
   // EL PUENTE 
-  userRegister = output<{ text: string, tel: string, email: string }>();
+  userRegister = output<{ text: string, tel: string, email: string, }>();
   errorMsj: string = "";
 
   //captura el envio del formulario y Frena evento  navegador con prevent (sumbit de html llama a sendForm)

@@ -13,7 +13,7 @@ import { FormNewUser } from './components/form-new-user/form-new-user';
 //CLASE PRINCIPAL;
 export class AppComponent {
   title = 'presupuestador-servicios-digitales';
-  
+
   // --- SEÑALES ---
 
   listService = signal<Service[]>([
@@ -42,13 +42,13 @@ export class AppComponent {
     },
   ]);
 
-  clientsData = signal<{ 
-    text: string; 
-    tel: string; 
-    email: string 
-    serviceSelect: Service [];
+  clientsData = signal<{
+    text: string;
+    tel: string;
+    email: string
+    serviceSelect: Service[];
     total: number;
-  }[]> ([]);
+  }[]>([]);
 
   searchFilter = signal('');
 
@@ -71,7 +71,7 @@ export class AppComponent {
 
           const extraServiceLanguages = item.languages!;
           const extraServicePages = item.pages!;
-          
+
           total += item.basePrice + (extraServiceLanguages + extraServicePages) * 30;
         } else {
 
@@ -90,9 +90,9 @@ export class AppComponent {
       services.map((item) => {
 
         if (item.id === clickedService.id) {
-        return clickedService;
+          return clickedService;
         } else {
-        return item;
+          return item;
         }
       }),
     );
@@ -101,12 +101,18 @@ export class AppComponent {
   }
 
   //Recibe los datos del formulario y los añade a la lista
-  saveUserData(userSaveData: { text: string, tel: string, email: string, serviceSelect: Service [], total:number }) {
-    
-    //actualizo lista y agrego los usuarios nuevos:
-    this.clientsData.update((newClient) => [...newClient, userSaveData]);
-   
-    console.log("Client data ready to save!", userSaveData);
+  saveUserData(userSaveData: { text: string, tel: string, email: string, }) {
+    const newClient = {
+      ...userSaveData,
+      //filtrar solo los seleccionados:
+      serviceSelect: this.listService().filter(service => service.selected),
+      total: this.totalPrice()
+    };
+
+    // Actualizamos la lista con el nuevo cliente completo
+    this.clientsData.update((clients) => [...clients, newClient]);
+
+    console.log("Client data ready to save!", newClient);
   }
 
   //Captura lo que escribes y actualiza la señal con set
