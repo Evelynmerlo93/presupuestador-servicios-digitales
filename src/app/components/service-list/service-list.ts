@@ -15,17 +15,16 @@ export class ServiceList {
     
     totalPrice = input<number>(0);
 
-//avisa al PADRE para que actualice informacion
+//Avisa al padre dando el servicio actualizado
 serviceSelect = output <Service> ();
 
   onServiceChange(service: Service) {
-    //crea una copia invierto estado y emito al padre
     const updatedService = { ...service, selected: !service.selected };
+    
     this.serviceSelect.emit(updatedService);
   }
 
   onPagesChange(service: Service, event: Event) {
-
     const inputElement = event.target as HTMLInputElement;
     const updatedService = { ...service, pages: Number(inputElement.value) };
 
@@ -33,7 +32,6 @@ serviceSelect = output <Service> ();
   }
 
   onLanguagesChange(service: Service, event: Event) {
-
     const inputElement = event.target as HTMLInputElement;
     const updatedService = { ...service, languages: Number(inputElement.value) };
     

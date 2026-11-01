@@ -7,12 +7,14 @@ import { Component, output } from '@angular/core';
   styleUrl: './form-new-user.css',
 })
 
-export class FormNewUser {
-  // EL PUENTE 
-  userRegister = output<{ text: string, tel: string, email: string, }>();
-  errorMsj: string = "";
 
-  //captura el envio del formulario y Frena evento  navegador con prevent (sumbit de html llama a sendForm)
+export class FormNewUser {
+//Megafono 
+userRegister = output<{ text: string, tel: string, email: string, }>();
+
+errorMsj: string = "";
+
+  //captura envio del formulario y frena evento navegador 
   sendForm(event: Event, text: string, tel: string, email: string , formElement: HTMLFormElement) {
     event.preventDefault();
 

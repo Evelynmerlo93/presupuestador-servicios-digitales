@@ -10,13 +10,11 @@ import { FormNewUser } from './components/form-new-user/form-new-user';
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
-//CLASE PRINCIPAL;
+
 export class AppComponent {
   title = 'presupuestador-servicios-digitales';
 
-  // --- SEÑALES ---
-
-  listService = signal<Service[]>([
+  listService = signal <Service[]> ([
     {
       id: 'Seo',
       name: 'Seo',
@@ -52,8 +50,9 @@ export class AppComponent {
 
   searchFilter = signal('');
 
+  //Propiedades Computed
 
-  filteredServices = computed(() => {
+ filteredServices = computed(() => {
     return this.clientsData()
       .filter((serviceItem) =>
         serviceItem.text.toLowerCase()
@@ -83,7 +82,7 @@ export class AppComponent {
     return total;
   });
 
-  // --- ACCIONES ---
+  // --- ACCIONES (funciones)---
 
   serviceSelect(clickedService: Service) {
     this.listService.update((services) =>
@@ -100,16 +99,18 @@ export class AppComponent {
     console.log('Servicio seleccionado o modificado: ', clickedService);
   }
 
-  //Recibe los datos del formulario y los añade a la lista
-  saveUserData(userSaveData: { text: string, tel: string, email: string, }) {
+  //Recibe datos del formulario y los añade a la lista
+saveUserData(userSaveData: { text: string, tel: string, email: string }) {
+    
     const newClient = {
       ...userSaveData,
-      //filtrar solo los seleccionados:
-      serviceSelect: this.listService().filter(service => service.selected),
-      total: this.totalPrice()
+      // servicios seleccionados clonados
+      serviceSelect: [...this.listService().filter(service => service.selected)],
+      
+      total: this.totalPrice() 
     };
 
-    // Actualizamos la lista con el nuevo cliente completo
+    // lista con el nuevo cliente completo
     this.clientsData.update((clients) => [...clients, newClient]);
 
     console.log("Client data ready to save!", newClient);
@@ -117,7 +118,6 @@ export class AppComponent {
 
   //Captura lo que escribes y actualiza la señal con set
   badgetListFilter(event: any) {
-
     const textUser = event.target.value;
     this.searchFilter.set(textUser);
   }
