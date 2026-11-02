@@ -14,7 +14,7 @@ import { FormNewUser } from './components/form-new-user/form-new-user';
 export class AppComponent {
   title = 'presupuestador-servicios-digitales';
 
-  listService = signal <Service[]> ([
+  listService = signal<Service[]>([
     {
       id: 'Seo',
       name: 'Seo',
@@ -50,9 +50,9 @@ export class AppComponent {
 
   searchFilter = signal('');
 
-  //Propiedades Computed
+  //Propiedades Reactivas Computed
 
- filteredServices = computed(() => {
+  filteredServices = computed(() => {
     return this.clientsData()
       .filter((serviceItem) =>
         serviceItem.text.toLowerCase()
@@ -100,14 +100,14 @@ export class AppComponent {
   }
 
   //Recibe datos del formulario y los añade a la lista
-saveUserData(userSaveData: { text: string, tel: string, email: string }) {
-    
+  saveUserData(userSaveData: { text: string, tel: string, email: string }) {
+
     const newClient = {
-      ...userSaveData,
-      // servicios seleccionados clonados
-      serviceSelect: [...this.listService().filter(service => service.selected)],
-      
-      total: this.totalPrice() 
+   //armo ficha del cliente con informacion recibida, creo propiedad
+      ...userSaveData, 
+      serviceSelect:[...this.listService()
+      .filter(service => service.selected)],
+      total: this.totalPrice()
     };
 
     // lista con el nuevo cliente completo
@@ -117,7 +117,7 @@ saveUserData(userSaveData: { text: string, tel: string, email: string }) {
   }
 
   //Captura lo que escribes y actualiza la señal con set
-  badgetListFilter(event: any) {
+  budgetListFilter(event: any) {
     const textUser = event.target.value;
     this.searchFilter.set(textUser);
   }
